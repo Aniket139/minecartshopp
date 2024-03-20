@@ -1,0 +1,20 @@
+= render partial: 'admins/header'
+%main
+  %section.card-wrap
+    .container
+      .row
+        .card-box-text
+          %h1 Dashboard
+        .card-box
+          .card-box-item
+            %h2= @categories
+            %h4 Categories
+          .card-box-item
+            %h2= @products
+            %h4 Products
+          .card-box-item
+            %h2= @orders.count
+            %h4 Total Order
+          .card-box-item
+            %h2(style="color: green;")= @profit.sum
+            %h4 Profit

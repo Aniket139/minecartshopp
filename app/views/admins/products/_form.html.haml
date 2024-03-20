@@ -1,0 +1,21 @@
+= form_with model: [:admins, product] do |form|
+  %div
+    = form.label :name
+    %br
+    = form.text_field :name
+  %br
+  %div
+    = form.label :purchase_price
+    %br
+    = form.text_field :purchase_price
+  %br
+  %div 
+    = form.label :sell_price
+    %br
+    = form.text_field :sell_price
+  %br
+  %div
+    = form.label :category
+    = form.collection_select(:category_id, @categories, :id, :name, prompt: 'Select a category')
+  %br
+  = form.submit 'Create Product'

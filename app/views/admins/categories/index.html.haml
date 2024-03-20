@@ -1,0 +1,27 @@
+= render partial: 'admins/header'
+
+%h1= "All Category"
+%br
+%brss
+
+%table
+  %thead
+    %tr
+      %th ID
+      %th Name  
+      %th{colspan: "2"} Action
+  %tbody
+    - @categories.each do |category|
+      %tr
+        %td= category.id
+        %td= category.name
+        %td
+          = link_to edit_admins_category_path(category) do
+            edit
+        %td
+          = link_to admins_category_path(category), method: 'delete', data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } do
+            Delete
+%br
+%br
+= link_to new_admins_category_path do
+  Add

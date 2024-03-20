@@ -1,0 +1,24 @@
+= render partial: 'admins/header'
+
+%h1 All Orders
+%br
+%br
+%table
+  %thead
+    %tr
+      %th ID
+      %th Customer Name
+      %th Address
+      %th Mobile
+      %th Product Name 
+      %th Price
+  %tbody
+    - @orders.each do |order|
+      %tr
+        %td= order.id
+        %td= order.customer.name
+        %td= order.customer.address
+        %td= order.customer.mobile
+        %td= order.product.name
+        %td= order.product.sell_price
+       

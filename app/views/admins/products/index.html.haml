@@ -1,0 +1,31 @@
+= render partial: 'admins/header'
+
+%h1 All Products
+%br
+%br
+%table
+  %thead
+    %tr
+      %th ID
+      %th Name
+      %th Purchase Price
+      %th Sell Price  
+      %th Category
+      %th{colspan: "2"} Action
+  %tbody
+    - @products.each do |product|
+      %tr
+        %td= product.id
+        %td= product.name
+        %td= product.purchase_price
+        %td= product.sell_price
+        %td= product.category.name
+        %td
+          = link_to edit_admins_product_path(product) do
+            edit
+        %td
+          = link_to admins_product_path(product), method: 'delete', data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } do
+            Delete
+%br
+= link_to new_admins_product_path do
+  Add

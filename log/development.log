@@ -1,0 +1,853 @@
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /home/sapl/workspace/minecartshop/config/environment.rb:5)
+  [1m[35m (16.8ms)[0m  [1m[35mCREATE DATABASE `minecart-dev` DEFAULT COLLATE `utf8mb4_bin`[0m
+  [1m[35m (6.6ms)[0m  [1m[35mCREATE DATABASE `minecart-test` DEFAULT COLLATE `utf8mb4_bin`[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /home/sapl/workspace/minecartshop/config/environment.rb:5)
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /home/sapl/workspace/minecartshop/config/environment.rb:5)
+  [1m[35m (22.0ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY)[0m
+  [1m[35m (20.7ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT GET_LOCK('6411813942558352020', 0)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (20.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.5ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Create (4.2ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2024-03-20 08:45:45.900707', '2024-03-20 08:45:45.900715')[0m
+Migrating to DeviseCreateCustomers (20240319122311)
+  [1m[35m (27.3ms)[0m  [1m[35mCREATE TABLE `customers` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime(6), `remember_created_at` datetime(6), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[35m (34.9ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_customers_on_email` ON `customers` (`email`)[0m
+  [1m[35m (32.8ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_customers_on_reset_password_token` ON `customers` (`reset_password_token`)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (3.5ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20240319122311')[0m
+Migrating to DeviseCreateAdmins (20240319122759)
+  [1m[35m (23.9ms)[0m  [1m[35mCREATE TABLE `admins` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime(6), `remember_created_at` datetime(6), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[35m (25.4ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_admins_on_email` ON `admins` (`email`)[0m
+  [1m[35m (30.1ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_admins_on_reset_password_token` ON `admins` (`reset_password_token`)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (5.0ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20240319122759')[0m
+Migrating to CreateCategories (20240320045740)
+  [1m[35m (32.7ms)[0m  [1m[35mCREATE TABLE `categories` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `description` text, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (3.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20240320045740')[0m
+Migrating to CreateProducts (20240320045839)
+  [1m[35m (37.3ms)[0m  [1m[35mCREATE TABLE `products` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `purchase_price` float(24), `sell_price` float(24), `category_id` bigint NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_products_on_category_id` (`category_id`), CONSTRAINT `fk_rails_fb915499a4`
+FOREIGN KEY (`category_id`)
+  REFERENCES `categories` (`id`)
+)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (6.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20240320045839')[0m
+Migrating to AddCloumnToCustomers (20240320051533)
+  [1m[35m (36.0ms)[0m  [1m[35mALTER TABLE `customers` ADD `name` varchar(255)[0m
+  [1m[35m (43.6ms)[0m  [1m[35mALTER TABLE `customers` ADD `city` varchar(255)[0m
+  [1m[35m (33.0ms)[0m  [1m[35mALTER TABLE `customers` ADD `state` varchar(255)[0m
+  [1m[35m (63.9ms)[0m  [1m[35mALTER TABLE `customers` ADD `country` varchar(255)[0m
+  [1m[35m (40.2ms)[0m  [1m[35mALTER TABLE `customers` ADD `mobile` varchar(255)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (3.8ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20240320051533')[0m
+Migrating to CreateOrders (20240320052344)
+  [1m[35m (54.9ms)[0m  [1m[35mCREATE TABLE `orders` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `customer_id` bigint NOT NULL, `product_id` bigint NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_orders_on_customer_id` (`customer_id`), INDEX `index_orders_on_product_id` (`product_id`), CONSTRAINT `fk_rails_3dad120da9`
+FOREIGN KEY (`customer_id`)
+  REFERENCES `customers` (`id`)
+, CONSTRAINT `fk_rails_dfb33b2de0`
+FOREIGN KEY (`product_id`)
+  REFERENCES `products` (`id`)
+)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (4.8ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20240320052344')[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT RELEASE_LOCK('6411813942558352020')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /home/sapl/workspace/minecartshop/config/environment.rb:5)
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /home/sapl/workspace/minecartshop/config/environment.rb:5)
+Started GET "/" for ::1 at 2024-03-20 14:20:39 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /usr/local/rvm/gems/ruby-3.2.0/gems/railties-7.1.3.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /usr/local/rvm/gems/ruby-3.2.0/gems/railties-7.1.3.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.7ms | Allocations: 372)
+Completed 200 OK in 18ms (Views: 6.4ms | ActiveRecord: 0.0ms | Allocations: 8970)
+
+
+Started GET "/admins/dashboard" for ::1 at 2024-03-20 14:21:02 +0530
+Processing by Admins::DashboardController#index as HTML
+  [1m[36mCategory Count (1.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `categories`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:3:in `index'
+  [1m[36mProduct Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM `products`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:4:in `index'
+  [1m[36mOrder Load (0.5ms)[0m  [1m[34mSELECT `orders`.* FROM `orders`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:8:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admins/dashboard/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 4.9ms | Allocations: 5334)
+  [1m[36mOrder Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `orders`[0m
+  ↳ app/views/admins/dashboard/index.html.haml:16
+  Rendered admins/dashboard/index.html.haml within layouts/application (Duration: 20.7ms | Allocations: 18780)
+  Rendered layout layouts/application.html.erb (Duration: 251.0ms | Allocations: 110051)
+Completed 200 OK in 310ms (Views: 252.3ms | ActiveRecord: 8.6ms | Allocations: 121297)
+
+
+Started GET "/admins/categories" for ::1 at 2024-03-20 14:23:55 +0530
+Processing by Admins::CategoriesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering admins/categories/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.3ms | Allocations: 93)
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT `categories`.* FROM `categories`[0m
+  ↳ app/views/admins/categories/index.html.haml:14
+  Rendered admins/categories/index.html.haml within layouts/application (Duration: 13.9ms | Allocations: 7445)
+  Rendered layout layouts/application.html.erb (Duration: 22.1ms | Allocations: 11495)
+Completed 200 OK in 24ms (Views: 22.9ms | ActiveRecord: 0.3ms | Allocations: 12001)
+
+
+Started GET "/admins/categories" for ::1 at 2024-03-20 14:23:58 +0530
+Processing by Admins::CategoriesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering admins/categories/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.5ms | Allocations: 87)
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT `categories`.* FROM `categories`[0m
+  ↳ app/views/admins/categories/index.html.haml:14
+  Rendered admins/categories/index.html.haml within layouts/application (Duration: 4.0ms | Allocations: 597)
+  Rendered layout layouts/application.html.erb (Duration: 9.1ms | Allocations: 2056)
+Completed 200 OK in 11ms (Views: 9.5ms | ActiveRecord: 0.7ms | Allocations: 2323)
+
+
+Started GET "/admins/products" for ::1 at 2024-03-20 14:24:00 +0530
+Processing by Admins::ProductsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering admins/products/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.4ms | Allocations: 93)
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/views/admins/products/index.html.haml:16
+  Rendered admins/products/index.html.haml within layouts/application (Duration: 19.2ms | Allocations: 8548)
+  Rendered layout layouts/application.html.erb (Duration: 22.3ms | Allocations: 10065)
+Completed 200 OK in 26ms (Views: 23.4ms | ActiveRecord: 0.4ms | Allocations: 10570)
+
+
+Started GET "/admins/products" for ::1 at 2024-03-20 14:24:02 +0530
+Processing by Admins::ProductsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering admins/products/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.5ms | Allocations: 87)
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/views/admins/products/index.html.haml:16
+  Rendered admins/products/index.html.haml within layouts/application (Duration: 3.9ms | Allocations: 601)
+  Rendered layout layouts/application.html.erb (Duration: 9.6ms | Allocations: 2093)
+Completed 200 OK in 11ms (Views: 10.0ms | ActiveRecord: 0.7ms | Allocations: 2366)
+
+
+Started GET "/admins/orders" for ::1 at 2024-03-20 14:24:03 +0530
+Processing by Admins::OrdersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering admins/orders/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.6ms | Allocations: 93)
+  [1m[36mOrder Load (0.7ms)[0m  [1m[34mSELECT `orders`.* FROM `orders`[0m
+  ↳ app/views/admins/orders/index.html.haml:16
+  Rendered admins/orders/index.html.haml within layouts/application (Duration: 18.9ms | Allocations: 7315)
+  Rendered layout layouts/application.html.erb (Duration: 24.8ms | Allocations: 8826)
+Completed 200 OK in 30ms (Views: 25.9ms | ActiveRecord: 0.7ms | Allocations: 9428)
+
+
+Started GET "/admins/dashboard" for ::1 at 2024-03-20 14:24:05 +0530
+Processing by Admins::DashboardController#index as HTML
+  [1m[36mCategory Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM `categories`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:3:in `index'
+  [1m[36mProduct Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `products`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:4:in `index'
+  [1m[36mOrder Load (0.6ms)[0m  [1m[34mSELECT `orders`.* FROM `orders`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:8:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admins/dashboard/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.5ms | Allocations: 87)
+  [1m[36mOrder Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `orders`[0m
+  ↳ app/views/admins/dashboard/index.html.haml:16
+  Rendered admins/dashboard/index.html.haml within layouts/application (Duration: 3.5ms | Allocations: 575)
+  Rendered layout layouts/application.html.erb (Duration: 9.3ms | Allocations: 2046)
+Completed 200 OK in 19ms (Views: 9.8ms | ActiveRecord: 2.6ms | Allocations: 3628)
+
+
+Started GET "/admins/categories" for ::1 at 2024-03-20 14:24:05 +0530
+Processing by Admins::CategoriesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering admins/categories/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.5ms | Allocations: 87)
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT `categories`.* FROM `categories`[0m
+  ↳ app/views/admins/categories/index.html.haml:14
+  Rendered admins/categories/index.html.haml within layouts/application (Duration: 4.0ms | Allocations: 597)
+  Rendered layout layouts/application.html.erb (Duration: 9.8ms | Allocations: 2071)
+Completed 200 OK in 12ms (Views: 10.2ms | ActiveRecord: 0.6ms | Allocations: 2338)
+
+
+Started GET "/admins/categories/new" for ::1 at 2024-03-20 14:24:06 +0530
+Processing by Admins::CategoriesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering admins/categories/new.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.2ms | Allocations: 87)
+  Rendered admins/categories/_form.html.haml (Duration: 30.2ms | Allocations: 7007)
+  Rendered admins/categories/new.html.haml within layouts/application (Duration: 42.0ms | Allocations: 9942)
+  Rendered layout layouts/application.html.erb (Duration: 47.6ms | Allocations: 11234)
+Completed 200 OK in 99ms (Views: 48.2ms | ActiveRecord: 5.8ms | Allocations: 19322)
+
+
+Started POST "/admins/categories" for ::1 at 2024-03-20 14:24:22 +0530
+Processing by Admins::CategoriesController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "category"=>{"name"=>"Mobile", "description"=>"All Mobile"}, "commit"=>"Create Category"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/admins/categories_controller.rb:13:in `create'
+  [1m[36mCategory Create (1.1ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `description`, `created_at`, `updated_at`) VALUES ('Mobile', 'All Mobile', '2024-03-20 08:54:22.226918', '2024-03-20 08:54:22.226918')[0m
+  ↳ app/controllers/admins/categories_controller.rb:13:in `create'
+  [1m[36mTRANSACTION (3.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/admins/categories_controller.rb:13:in `create'
+Redirected to http://localhost:3000/admins/categories
+Completed 302 Found in 8ms (ActiveRecord: 4.9ms | Allocations: 3211)
+
+
+Started GET "/admins/categories" for ::1 at 2024-03-20 14:24:22 +0530
+Processing by Admins::CategoriesController#index as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering admins/categories/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.2ms | Allocations: 87)
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT `categories`.* FROM `categories`[0m
+  ↳ app/views/admins/categories/index.html.haml:14
+  Rendered admins/categories/index.html.haml within layouts/application (Duration: 1.8ms | Allocations: 823)
+  Rendered layout layouts/application.html.erb (Duration: 3.9ms | Allocations: 2309)
+Completed 200 OK in 5ms (Views: 4.0ms | ActiveRecord: 0.3ms | Allocations: 2624)
+
+
+Started GET "/admins/products" for ::1 at 2024-03-20 14:24:23 +0530
+Processing by Admins::ProductsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering admins/products/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.5ms | Allocations: 87)
+  [1m[36mProduct Load (0.8ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/views/admins/products/index.html.haml:16
+  Rendered admins/products/index.html.haml within layouts/application (Duration: 5.1ms | Allocations: 597)
+  Rendered layout layouts/application.html.erb (Duration: 10.3ms | Allocations: 2077)
+Completed 200 OK in 12ms (Views: 10.6ms | ActiveRecord: 0.7ms | Allocations: 2344)
+
+
+Started GET "/admins/products/new" for ::1 at 2024-03-20 14:24:25 +0530
+Processing by Admins::ProductsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering admins/products/new.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.4ms | Allocations: 87)
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT `categories`.* FROM `categories`[0m
+  ↳ app/views/admins/products/_form.html.haml:19
+  Rendered admins/products/_form.html.haml (Duration: 14.2ms | Allocations: 8479)
+  Rendered admins/products/new.html.haml within layouts/application (Duration: 24.7ms | Allocations: 11540)
+  Rendered layout layouts/application.html.erb (Duration: 26.7ms | Allocations: 12831)
+Completed 200 OK in 65ms (Views: 27.2ms | ActiveRecord: 3.2ms | Allocations: 18474)
+
+
+Started POST "/admins/products" for ::1 at 2024-03-20 14:24:48 +0530
+Processing by Admins::ProductsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "product"=>{"name"=>"I phone 15pro", "purchase_price"=>"100000", "sell_price"=>"120000", "category_id"=>"1"}, "commit"=>"Create Product"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/admins/products_controller.rb:14:in `create'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admins/products_controller.rb:14:in `create'
+  [1m[36mProduct Create (0.3ms)[0m  [1m[32mINSERT INTO `products` (`name`, `purchase_price`, `sell_price`, `category_id`, `created_at`, `updated_at`) VALUES ('I phone 15pro', 100000.0, 120000.0, 1, '2024-03-20 08:54:48.996020', '2024-03-20 08:54:48.996020')[0m
+  ↳ app/controllers/admins/products_controller.rb:14:in `create'
+  [1m[36mTRANSACTION (2.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/admins/products_controller.rb:14:in `create'
+Redirected to http://localhost:3000/admins/products
+Completed 302 Found in 22ms (ActiveRecord: 3.4ms | Allocations: 10853)
+
+
+Started GET "/admins/products" for ::1 at 2024-03-20 14:24:49 +0530
+Processing by Admins::ProductsController#index as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering admins/products/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.2ms | Allocations: 87)
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/views/admins/products/index.html.haml:16
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/admins/products/index.html.haml:22
+  Rendered admins/products/index.html.haml within layouts/application (Duration: 3.5ms | Allocations: 1264)
+  Rendered layout layouts/application.html.erb (Duration: 5.4ms | Allocations: 2736)
+Completed 200 OK in 6ms (Views: 5.2ms | ActiveRecord: 0.6ms | Allocations: 3006)
+
+
+Started GET "/admins/dashboard" for ::1 at 2024-03-20 14:24:50 +0530
+Processing by Admins::DashboardController#index as HTML
+  [1m[36mCategory Count (1.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `categories`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:3:in `index'
+  [1m[36mProduct Count (1.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `products`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:4:in `index'
+  [1m[36mOrder Load (0.6ms)[0m  [1m[34mSELECT `orders`.* FROM `orders`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:8:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admins/dashboard/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.5ms | Allocations: 87)
+  [1m[36mOrder Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `orders`[0m
+  ↳ app/views/admins/dashboard/index.html.haml:16
+  Rendered admins/dashboard/index.html.haml within layouts/application (Duration: 3.7ms | Allocations: 572)
+  Rendered layout layouts/application.html.erb (Duration: 9.1ms | Allocations: 2049)
+Completed 200 OK in 21ms (Views: 9.6ms | ActiveRecord: 4.2ms | Allocations: 3633)
+
+
+Started GET "/admins/categories" for ::1 at 2024-03-20 14:24:52 +0530
+Processing by Admins::CategoriesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering admins/categories/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.5ms | Allocations: 87)
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT `categories`.* FROM `categories`[0m
+  ↳ app/views/admins/categories/index.html.haml:14
+  Rendered admins/categories/index.html.haml within layouts/application (Duration: 4.7ms | Allocations: 692)
+  Rendered layout layouts/application.html.erb (Duration: 9.7ms | Allocations: 2169)
+Completed 200 OK in 12ms (Views: 10.0ms | ActiveRecord: 0.7ms | Allocations: 2436)
+
+
+Started GET "/admins/products" for ::1 at 2024-03-20 14:24:54 +0530
+Processing by Admins::ProductsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering admins/products/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.5ms | Allocations: 87)
+  [1m[36mProduct Load (0.8ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/views/admins/products/index.html.haml:16
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/admins/products/index.html.haml:22
+  Rendered admins/products/index.html.haml within layouts/application (Duration: 7.9ms | Allocations: 1229)
+  Rendered layout layouts/application.html.erb (Duration: 12.8ms | Allocations: 2700)
+Completed 200 OK in 15ms (Views: 12.4ms | ActiveRecord: 1.4ms | Allocations: 2967)
+
+
+Started GET "/admins/orders" for ::1 at 2024-03-20 14:24:57 +0530
+Processing by Admins::OrdersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering admins/orders/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.5ms | Allocations: 87)
+  [1m[36mOrder Load (0.8ms)[0m  [1m[34mSELECT `orders`.* FROM `orders`[0m
+  ↳ app/views/admins/orders/index.html.haml:16
+  Rendered admins/orders/index.html.haml within layouts/application (Duration: 4.1ms | Allocations: 616)
+  Rendered layout layouts/application.html.erb (Duration: 9.1ms | Allocations: 2102)
+Completed 200 OK in 11ms (Views: 9.5ms | ActiveRecord: 0.7ms | Allocations: 2382)
+
+
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /home/sapl/workspace/minecartshop/config/environment.rb:5)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCustomer Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `customers` WHERE `customers`.`email` = 'aniket@gmail.com' LIMIT 1[0m
+  [1m[36mCustomer Create (0.2ms)[0m  [1m[32mINSERT INTO `customers` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`, `name`, `city`, `state`, `country`, `mobile`) VALUES ('aniket@gmail.com', '$2a$12$RmP1Rvp2GFvxOlBRzYVs.etqEHcg9vL1j7RqrKE9grCvVxx1qstpG', NULL, NULL, NULL, '2024-03-20 08:58:39.409966', '2024-03-20 08:58:39.409966', 'Aniket', 'surat', 'gujarat', 'india', '963852147')[0m
+  [1m[36mTRANSACTION (3.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT `customers`.* FROM `customers` WHERE `customers`.`id` = 1 LIMIT 1[0m
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  [1m[36mOrder Create (0.4ms)[0m  [1m[32mINSERT INTO `orders` (`customer_id`, `product_id`, `created_at`, `updated_at`) VALUES (1, 1, '2024-03-20 08:59:31.956812', '2024-03-20 08:59:31.956812')[0m
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[35mCOMMIT[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /home/sapl/workspace/minecartshop/config/environment.rb:5)
+Started GET "/admins/dashboard" for ::1 at 2024-03-20 14:29:53 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by Admins::DashboardController#index as HTML
+  [1m[36mCategory Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `categories`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:3:in `index'
+  [1m[36mProduct Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `products`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:4:in `index'
+  [1m[36mOrder Load (0.3ms)[0m  [1m[34mSELECT `orders`.* FROM `orders`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:8:in `index'
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT `products`.* FROM `products` WHERE `products`.`id` = 1[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:8:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admins/dashboard/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 3.1ms | Allocations: 5339)
+  [1m[36mOrder Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `orders`[0m
+  ↳ app/views/admins/dashboard/index.html.haml:16
+  Rendered admins/dashboard/index.html.haml within layouts/application (Duration: 13.6ms | Allocations: 18429)
+  Rendered layout layouts/application.html.erb (Duration: 48.2ms | Allocations: 51557)
+Completed 200 OK in 109ms (Views: 50.3ms | ActiveRecord: 8.5ms | Allocations: 82049)
+
+
+Started GET "/admins/dashboard" for ::1 at 2024-03-20 14:29:54 +0530
+Processing by Admins::DashboardController#index as HTML
+  [1m[36mCategory Count (4.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `categories`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:3:in `index'
+  [1m[36mProduct Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `products`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:4:in `index'
+  [1m[36mOrder Load (0.2ms)[0m  [1m[34mSELECT `orders`.* FROM `orders`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:8:in `index'
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT `products`.* FROM `products` WHERE `products`.`id` = 1[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:8:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admins/dashboard/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.1ms | Allocations: 87)
+  [1m[36mOrder Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `orders`[0m
+  ↳ app/views/admins/dashboard/index.html.haml:16
+  Rendered admins/dashboard/index.html.haml within layouts/application (Duration: 1.4ms | Allocations: 572)
+  Rendered layout layouts/application.html.erb (Duration: 2.9ms | Allocations: 2048)
+Completed 200 OK in 13ms (Views: 2.6ms | ActiveRecord: 6.4ms | Allocations: 4362)
+
+
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /home/sapl/workspace/minecartshop/config/environment.rb:5)
+Started GET "/admins/sign_in" for ::1 at 2024-03-20 14:31:45 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 1.0ms | Allocations: 586)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 11.2ms | Allocations: 3805)
+  Rendered layout layouts/application.html.erb (Duration: 47.7ms | Allocations: 35489)
+Completed 200 OK in 171ms (Views: 62.7ms | ActiveRecord: 9.9ms | Allocations: 55092)
+
+
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /home/sapl/workspace/minecartshop/config/environment.rb:5)
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /home/sapl/workspace/minecartshop/config/environment.rb:5)
+Started GET "/admins/dashboard" for ::1 at 2024-03-20 14:38:17 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by Admins::DashboardController#index as HTML
+  [1m[36mCategory Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM `categories`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:3:in `index'
+  [1m[36mProduct Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `products`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:4:in `index'
+  [1m[36mOrder Load (0.3ms)[0m  [1m[34mSELECT `orders`.* FROM `orders`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:8:in `index'
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT `products`.* FROM `products` WHERE `products`.`id` = 1[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:8:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admins/dashboard/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 3.5ms | Allocations: 5339)
+  [1m[36mOrder Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `orders`[0m
+  ↳ app/views/admins/dashboard/index.html.haml:16
+  Rendered admins/dashboard/index.html.haml within layouts/application (Duration: 18.3ms | Allocations: 18430)
+  Rendered layout layouts/application.html.erb (Duration: 58.0ms | Allocations: 51538)
+Completed 200 OK in 124ms (Views: 59.9ms | ActiveRecord: 8.7ms | Allocations: 80878)
+
+
+Started GET "/admins/categories" for ::1 at 2024-03-20 14:38:19 +0530
+Processing by Admins::CategoriesController#index as HTML
+Completed 401 Unauthorized in 9ms (ActiveRecord: 0.0ms | Allocations: 1341)
+
+
+Started GET "/admins/sign_in" for ::1 at 2024-03-20 14:38:19 +0530
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.9ms | Allocations: 573)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 5.0ms | Allocations: 2714)
+  Rendered layout layouts/application.html.erb (Duration: 7.0ms | Allocations: 4068)
+Completed 200 OK in 22ms (Views: 8.4ms | ActiveRecord: 2.5ms | Allocations: 13490)
+
+
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /home/sapl/workspace/minecartshop/config/environment.rb:5)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAdmin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `admins` WHERE `admins`.`email` = 'admin@gmail.com' LIMIT 1[0m
+  [1m[36mAdmin Create (0.2ms)[0m  [1m[32mINSERT INTO `admins` (`email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `created_at`, `updated_at`) VALUES ('admin@gmail.com', '$2a$12$9qZwRDSK7.L7PHVg0Kwrw.ToPZPuacSo.ZgQnzUaFnHc4miCKYgB.', NULL, NULL, NULL, '2024-03-20 09:10:27.367923', '2024-03-20 09:10:27.367923')[0m
+  [1m[36mTRANSACTION (3.4ms)[0m  [1m[35mCOMMIT[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /home/sapl/workspace/minecartshop/config/environment.rb:5)
+Started GET "/admins/sign_in" for ::1 at 2024-03-20 14:40:42 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.8ms | Allocations: 586)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 7.0ms | Allocations: 3440)
+  Rendered layout layouts/application.html.erb (Duration: 44.4ms | Allocations: 35088)
+Completed 200 OK in 94ms (Views: 50.4ms | ActiveRecord: 4.1ms | Allocations: 54429)
+
+
+Started POST "/admins/sign_in" for ::1 at 2024-03-20 14:41:01 +0530
+Processing by Devise::SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "admin"=>{"email"=>"admin@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"1"}, "commit"=>"Log in"}
+  [1m[36mAdmin Load (0.5ms)[0m  [1m[34mSELECT `admins`.* FROM `admins` WHERE `admins`.`email` = 'admin@gmail.com' ORDER BY `admins`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAdmin Update (0.3ms)[0m  [1m[33mUPDATE `admins` SET `admins`.`remember_created_at` = '2024-03-20 09:11:02.000201', `admins`.`updated_at` = '2024-03-20 09:11:02.000566' WHERE `admins`.`id` = 1[0m
+  [1m[36mTRANSACTION (3.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/admins/categories
+Completed 303 See Other in 244ms (ActiveRecord: 4.8ms | Allocations: 12690)
+
+
+Started GET "/admins/categories" for ::1 at 2024-03-20 14:41:02 +0530
+Processing by Admins::CategoriesController#index as TURBO_STREAM
+  [1m[36mAdmin Load (0.3ms)[0m  [1m[34mSELECT `admins`.* FROM `admins` WHERE `admins`.`id` = 1 ORDER BY `admins`.`id` ASC LIMIT 1[0m
+  Rendering layout layouts/application.html.erb
+  Rendering admins/categories/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 3.9ms | Allocations: 5250)
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT `categories`.* FROM `categories`[0m
+  ↳ app/views/admins/categories/index.html.haml:14
+  Rendered admins/categories/index.html.haml within layouts/application (Duration: 20.9ms | Allocations: 22548)
+  Rendered layout layouts/application.html.erb (Duration: 22.5ms | Allocations: 23933)
+Completed 200 OK in 27ms (Views: 21.6ms | ActiveRecord: 2.1ms | Allocations: 26457)
+
+
+Started GET "/admins/dashboard" for ::1 at 2024-03-20 14:41:04 +0530
+Processing by Admins::DashboardController#index as HTML
+  [1m[36mAdmin Load (0.5ms)[0m  [1m[34mSELECT `admins`.* FROM `admins` WHERE `admins`.`id` = 1 ORDER BY `admins`.`id` ASC LIMIT 1[0m
+  [1m[36mCategory Count (3.8ms)[0m  [1m[34mSELECT COUNT(*) FROM `categories`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:4:in `index'
+  [1m[36mProduct Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM `products`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:5:in `index'
+  [1m[36mOrder Load (0.3ms)[0m  [1m[34mSELECT `orders`.* FROM `orders`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:9:in `index'
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT `products`.* FROM `products` WHERE `products`.`id` = 1[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:9:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admins/dashboard/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.2ms | Allocations: 93)
+  [1m[36mOrder Count (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `orders`[0m
+  ↳ app/views/admins/dashboard/index.html.haml:16
+  Rendered admins/dashboard/index.html.haml within layouts/application (Duration: 8.5ms | Allocations: 7507)
+  Rendered layout layouts/application.html.erb (Duration: 10.4ms | Allocations: 8836)
+Completed 200 OK in 52ms (Views: 9.9ms | ActiveRecord: 10.5ms | Allocations: 27164)
+
+
+Started GET "/admins/dashboard" for ::1 at 2024-03-20 14:41:56 +0530
+Processing by Admins::DashboardController#index as HTML
+  [1m[36mAdmin Load (0.2ms)[0m  [1m[34mSELECT `admins`.* FROM `admins` WHERE `admins`.`id` = 1 ORDER BY `admins`.`id` ASC LIMIT 1[0m
+  [1m[36mCategory Count (7.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `categories`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:4:in `index'
+  [1m[36mProduct Count (1.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `products`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:5:in `index'
+  [1m[36mOrder Load (0.6ms)[0m  [1m[34mSELECT `orders`.* FROM `orders`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:9:in `index'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT `products`.* FROM `products` WHERE `products`.`id` = 1[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:9:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admins/dashboard/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 3.3ms | Allocations: 5220)
+  [1m[36mOrder Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `orders`[0m
+  ↳ app/views/admins/dashboard/index.html.haml:16
+  Rendered admins/dashboard/index.html.haml within layouts/application (Duration: 9.6ms | Allocations: 12670)
+  Rendered layout layouts/application.html.erb (Duration: 29.0ms | Allocations: 27114)
+Completed 200 OK in 75ms (Views: 30.2ms | ActiveRecord: 17.8ms | Allocations: 44507)
+
+
+Started GET "/admins/dashboard" for ::1 at 2024-03-20 14:42:26 +0530
+Processing by Admins::DashboardController#index as HTML
+  [1m[36mAdmin Load (0.8ms)[0m  [1m[34mSELECT `admins`.* FROM `admins` WHERE `admins`.`id` = 1 ORDER BY `admins`.`id` ASC LIMIT 1[0m
+  [1m[36mCategory Count (1.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `categories`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:4:in `index'
+  [1m[36mProduct Count (1.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `products`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:5:in `index'
+  [1m[36mOrder Load (0.6ms)[0m  [1m[34mSELECT `orders`.* FROM `orders`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:9:in `index'
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT `products`.* FROM `products` WHERE `products`.`id` = 1[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:9:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admins/dashboard/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.5ms | Allocations: 87)
+  [1m[36mOrder Count (1.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `orders`[0m
+  ↳ app/views/admins/dashboard/index.html.haml:16
+  Rendered admins/dashboard/index.html.haml within layouts/application (Duration: 4.8ms | Allocations: 572)
+  Rendered layout layouts/application.html.erb (Duration: 8.0ms | Allocations: 1870)
+Completed 200 OK in 32ms (Views: 7.5ms | ActiveRecord: 7.0ms | Allocations: 5536)
+
+
+Started GET "/admins/categories" for ::1 at 2024-03-20 14:42:26 +0530
+Processing by Admins::CategoriesController#index as HTML
+  [1m[36mAdmin Load (1.1ms)[0m  [1m[34mSELECT `admins`.* FROM `admins` WHERE `admins`.`id` = 1 ORDER BY `admins`.`id` ASC LIMIT 1[0m
+  Rendering layout layouts/application.html.erb
+  Rendering admins/categories/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.3ms | Allocations: 93)
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT `categories`.* FROM `categories`[0m
+  ↳ app/views/admins/categories/index.html.haml:14
+  Rendered admins/categories/index.html.haml within layouts/application (Duration: 20.9ms | Allocations: 9533)
+  Rendered layout layouts/application.html.erb (Duration: 23.3ms | Allocations: 10839)
+Completed 200 OK in 33ms (Views: 23.5ms | ActiveRecord: 2.8ms | Allocations: 12762)
+
+
+Started GET "/admins/products" for ::1 at 2024-03-20 14:42:27 +0530
+Processing by Admins::ProductsController#index as HTML
+  [1m[36mAdmin Load (0.6ms)[0m  [1m[34mSELECT `admins`.* FROM `admins` WHERE `admins`.`id` = 1 ORDER BY `admins`.`id` ASC LIMIT 1[0m
+  Rendering layout layouts/application.html.erb
+  Rendering admins/products/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.3ms | Allocations: 93)
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/views/admins/products/index.html.haml:16
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/admins/products/index.html.haml:22
+  Rendered admins/products/index.html.haml within layouts/application (Duration: 12.8ms | Allocations: 10949)
+  Rendered layout layouts/application.html.erb (Duration: 14.4ms | Allocations: 12254)
+Completed 200 OK in 20ms (Views: 14.5ms | ActiveRecord: 1.2ms | Allocations: 14182)
+
+
+Started GET "/admins/dashboard" for ::1 at 2024-03-20 14:42:29 +0530
+Processing by Admins::DashboardController#index as HTML
+  [1m[36mAdmin Load (0.3ms)[0m  [1m[34mSELECT `admins`.* FROM `admins` WHERE `admins`.`id` = 1 ORDER BY `admins`.`id` ASC LIMIT 1[0m
+  [1m[36mCategory Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `categories`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:4:in `index'
+  [1m[36mProduct Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `products`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:5:in `index'
+  [1m[36mOrder Load (0.2ms)[0m  [1m[34mSELECT `orders`.* FROM `orders`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:9:in `index'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT `products`.* FROM `products` WHERE `products`.`id` = 1[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:9:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admins/dashboard/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.2ms | Allocations: 87)
+  [1m[36mOrder Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `orders`[0m
+  ↳ app/views/admins/dashboard/index.html.haml:16
+  Rendered admins/dashboard/index.html.haml within layouts/application (Duration: 1.7ms | Allocations: 572)
+  Rendered layout layouts/application.html.erb (Duration: 3.6ms | Allocations: 1864)
+Completed 200 OK in 11ms (Views: 3.5ms | ActiveRecord: 2.3ms | Allocations: 5542)
+
+
+Started GET "/admins/orders" for ::1 at 2024-03-20 14:50:44 +0530
+Processing by Admins::OrdersController#index as HTML
+  [1m[36mAdmin Load (0.2ms)[0m  [1m[34mSELECT `admins`.* FROM `admins` WHERE `admins`.`id` = 1 ORDER BY `admins`.`id` ASC LIMIT 1[0m
+  Rendering layout layouts/application.html.erb
+  Rendering admins/orders/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 2.9ms | Allocations: 5221)
+  [1m[36mOrder Load (0.3ms)[0m  [1m[34mSELECT `orders`.* FROM `orders`[0m
+  ↳ app/views/admins/orders/index.html.haml:16
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT `customers`.* FROM `customers` WHERE `customers`.`id` = 1[0m
+  ↳ app/views/admins/orders/index.html.haml:16
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT `products`.* FROM `products` WHERE `products`.`id` = 1[0m
+  ↳ app/views/admins/orders/index.html.haml:16
+  Rendered admins/orders/index.html.haml within layouts/application (Duration: 31.2ms | Allocations: 29630)
+  Rendered layout layouts/application.html.erb (Duration: 40.6ms | Allocations: 44097)
+Completed 200 OK in 53ms (Views: 37.5ms | ActiveRecord: 4.7ms | Allocations: 51791)
+
+
+Started GET "/admins/dashboard" for ::1 at 2024-03-20 14:50:59 +0530
+Processing by Admins::DashboardController#index as HTML
+  [1m[36mAdmin Load (0.3ms)[0m  [1m[34mSELECT `admins`.* FROM `admins` WHERE `admins`.`id` = 1 ORDER BY `admins`.`id` ASC LIMIT 1[0m
+  [1m[36mCategory Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `categories`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:4:in `index'
+  [1m[36mProduct Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `products`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:5:in `index'
+  [1m[36mOrder Load (0.2ms)[0m  [1m[34mSELECT `orders`.* FROM `orders`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:9:in `index'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT `products`.* FROM `products` WHERE `products`.`id` = 1[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:9:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admins/dashboard/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.2ms | Allocations: 93)
+  [1m[36mOrder Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `orders`[0m
+  ↳ app/views/admins/dashboard/index.html.haml:16
+  Rendered admins/dashboard/index.html.haml within layouts/application (Duration: 9.7ms | Allocations: 7501)
+  Rendered layout layouts/application.html.erb (Duration: 11.4ms | Allocations: 8830)
+Completed 200 OK in 20ms (Views: 11.3ms | ActiveRecord: 2.6ms | Allocations: 13329)
+
+
+Started GET "/admins/categories" for ::1 at 2024-03-20 14:55:21 +0530
+Processing by Admins::CategoriesController#index as HTML
+  [1m[36mAdmin Load (0.5ms)[0m  [1m[34mSELECT `admins`.* FROM `admins` WHERE `admins`.`id` = 1 ORDER BY `admins`.`id` ASC LIMIT 1[0m
+  Rendering layout layouts/application.html.erb
+  Rendering admins/categories/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.6ms | Allocations: 93)
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT `categories`.* FROM `categories`[0m
+  ↳ app/views/admins/categories/index.html.haml:14
+  Rendered admins/categories/index.html.haml within layouts/application (Duration: 14.6ms | Allocations: 9444)
+  Rendered layout layouts/application.html.erb (Duration: 17.4ms | Allocations: 10765)
+Completed 200 OK in 23ms (Views: 18.1ms | ActiveRecord: 0.9ms | Allocations: 12698)
+
+
+Started GET "/admins/products" for ::1 at 2024-03-20 14:55:21 +0530
+Processing by Admins::ProductsController#index as HTML
+  [1m[36mAdmin Load (0.8ms)[0m  [1m[34mSELECT `admins`.* FROM `admins` WHERE `admins`.`id` = 1 ORDER BY `admins`.`id` ASC LIMIT 1[0m
+  Rendering layout layouts/application.html.erb
+  Rendering admins/products/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.3ms | Allocations: 93)
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/views/admins/products/index.html.haml:16
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/admins/products/index.html.haml:22
+  Rendered admins/products/index.html.haml within layouts/application (Duration: 16.4ms | Allocations: 10475)
+  Rendered layout layouts/application.html.erb (Duration: 18.6ms | Allocations: 11781)
+Completed 200 OK in 28ms (Views: 19.3ms | ActiveRecord: 1.5ms | Allocations: 13695)
+
+
+Started GET "/admins/orders" for ::1 at 2024-03-20 14:55:22 +0530
+Processing by Admins::OrdersController#index as HTML
+  [1m[36mAdmin Load (0.9ms)[0m  [1m[34mSELECT `admins`.* FROM `admins` WHERE `admins`.`id` = 1 ORDER BY `admins`.`id` ASC LIMIT 1[0m
+  Rendering layout layouts/application.html.erb
+  Rendering admins/orders/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.6ms | Allocations: 87)
+  [1m[36mOrder Load (0.7ms)[0m  [1m[34mSELECT `orders`.* FROM `orders`[0m
+  ↳ app/views/admins/orders/index.html.haml:16
+  [1m[36mCustomer Load (0.7ms)[0m  [1m[34mSELECT `customers`.* FROM `customers` WHERE `customers`.`id` = 1[0m
+  ↳ app/views/admins/orders/index.html.haml:16
+  [1m[36mProduct Load (0.8ms)[0m  [1m[34mSELECT `products`.* FROM `products` WHERE `products`.`id` = 1[0m
+  ↳ app/views/admins/orders/index.html.haml:16
+  Rendered admins/orders/index.html.haml within layouts/application (Duration: 12.4ms | Allocations: 2073)
+  Rendered layout layouts/application.html.erb (Duration: 17.6ms | Allocations: 3365)
+Completed 200 OK in 27ms (Views: 16.7ms | ActiveRecord: 2.9ms | Allocations: 5028)
+
+
+Started GET "/admins/categories" for ::1 at 2024-03-20 14:55:24 +0530
+Processing by Admins::CategoriesController#index as HTML
+  [1m[36mAdmin Load (0.9ms)[0m  [1m[34mSELECT `admins`.* FROM `admins` WHERE `admins`.`id` = 1 ORDER BY `admins`.`id` ASC LIMIT 1[0m
+  Rendering layout layouts/application.html.erb
+  Rendering admins/categories/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.5ms | Allocations: 87)
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT `categories`.* FROM `categories`[0m
+  ↳ app/views/admins/categories/index.html.haml:14
+  Rendered admins/categories/index.html.haml within layouts/application (Duration: 4.9ms | Allocations: 691)
+  Rendered layout layouts/application.html.erb (Duration: 9.6ms | Allocations: 1983)
+Completed 200 OK in 18ms (Views: 10.1ms | ActiveRecord: 1.5ms | Allocations: 3615)
+
+
+Started GET "/admins/orders" for ::1 at 2024-03-20 14:55:25 +0530
+Processing by Admins::OrdersController#index as HTML
+  [1m[36mAdmin Load (0.8ms)[0m  [1m[34mSELECT `admins`.* FROM `admins` WHERE `admins`.`id` = 1 ORDER BY `admins`.`id` ASC LIMIT 1[0m
+  Rendering layout layouts/application.html.erb
+  Rendering admins/orders/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.5ms | Allocations: 87)
+  [1m[36mOrder Load (0.6ms)[0m  [1m[34mSELECT `orders`.* FROM `orders`[0m
+  ↳ app/views/admins/orders/index.html.haml:16
+  [1m[36mCustomer Load (0.5ms)[0m  [1m[34mSELECT `customers`.* FROM `customers` WHERE `customers`.`id` = 1[0m
+  ↳ app/views/admins/orders/index.html.haml:16
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT `products`.* FROM `products` WHERE `products`.`id` = 1[0m
+  ↳ app/views/admins/orders/index.html.haml:16
+  Rendered admins/orders/index.html.haml within layouts/application (Duration: 9.5ms | Allocations: 2065)
+  Rendered layout layouts/application.html.erb (Duration: 12.6ms | Allocations: 3357)
+Completed 200 OK in 22ms (Views: 11.9ms | ActiveRecord: 2.5ms | Allocations: 5014)
+
+
+Started GET "/admins/products" for ::1 at 2024-03-20 14:55:25 +0530
+Processing by Admins::ProductsController#index as HTML
+  [1m[36mAdmin Load (0.8ms)[0m  [1m[34mSELECT `admins`.* FROM `admins` WHERE `admins`.`id` = 1 ORDER BY `admins`.`id` ASC LIMIT 1[0m
+  Rendering layout layouts/application.html.erb
+  Rendering admins/products/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.7ms | Allocations: 87)
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/views/admins/products/index.html.haml:16
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/admins/products/index.html.haml:22
+  Rendered admins/products/index.html.haml within layouts/application (Duration: 8.0ms | Allocations: 1229)
+  Rendered layout layouts/application.html.erb (Duration: 14.0ms | Allocations: 2521)
+Completed 200 OK in 24ms (Views: 13.8ms | ActiveRecord: 2.1ms | Allocations: 4153)
+
+
+Started GET "/admins/categories" for ::1 at 2024-03-20 14:55:26 +0530
+Processing by Admins::CategoriesController#index as HTML
+  [1m[36mAdmin Load (0.7ms)[0m  [1m[34mSELECT `admins`.* FROM `admins` WHERE `admins`.`id` = 1 ORDER BY `admins`.`id` ASC LIMIT 1[0m
+  Rendering layout layouts/application.html.erb
+  Rendering admins/categories/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.5ms | Allocations: 87)
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT `categories`.* FROM `categories`[0m
+  ↳ app/views/admins/categories/index.html.haml:14
+  Rendered admins/categories/index.html.haml within layouts/application (Duration: 4.2ms | Allocations: 691)
+  Rendered layout layouts/application.html.erb (Duration: 14.6ms | Allocations: 2003)
+Completed 200 OK in 23ms (Views: 15.0ms | ActiveRecord: 1.4ms | Allocations: 3633)
+
+
+Started GET "/admins/categories" for ::1 at 2024-03-20 14:55:41 +0530
+Processing by Admins::CategoriesController#index as HTML
+  [1m[36mAdmin Load (0.9ms)[0m  [1m[34mSELECT `admins`.* FROM `admins` WHERE `admins`.`id` = 1 ORDER BY `admins`.`id` ASC LIMIT 1[0m
+  Rendering layout layouts/application.html.erb
+  Rendering admins/categories/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.5ms | Allocations: 87)
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT `categories`.* FROM `categories`[0m
+  ↳ app/views/admins/categories/index.html.haml:14
+  Rendered admins/categories/index.html.haml within layouts/application (Duration: 4.9ms | Allocations: 691)
+  Rendered layout layouts/application.html.erb (Duration: 10.6ms | Allocations: 1995)
+Completed 200 OK in 21ms (Views: 11.0ms | ActiveRecord: 1.5ms | Allocations: 3655)
+
+
+Started GET "/admins/categories" for ::1 at 2024-03-20 14:58:32 +0530
+Processing by Admins::CategoriesController#index as HTML
+  [1m[36mAdmin Load (0.9ms)[0m  [1m[34mSELECT `admins`.* FROM `admins` WHERE `admins`.`id` = 1 ORDER BY `admins`.`id` ASC LIMIT 1[0m
+  Rendering layout layouts/application.html.erb
+  Rendering admins/categories/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.5ms | Allocations: 87)
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT `categories`.* FROM `categories`[0m
+  ↳ app/views/admins/categories/index.html.haml:14
+  Rendered admins/categories/index.html.haml within layouts/application (Duration: 4.5ms | Allocations: 691)
+  Rendered layout layouts/application.html.erb (Duration: 9.2ms | Allocations: 1998)
+Completed 200 OK in 19ms (Views: 10.0ms | ActiveRecord: 1.6ms | Allocations: 3639)
+
+
+Started GET "/admins/products" for ::1 at 2024-03-20 14:58:54 +0530
+Processing by Admins::ProductsController#index as HTML
+  [1m[36mAdmin Load (0.8ms)[0m  [1m[34mSELECT `admins`.* FROM `admins` WHERE `admins`.`id` = 1 ORDER BY `admins`.`id` ASC LIMIT 1[0m
+  Rendering layout layouts/application.html.erb
+  Rendering admins/products/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.5ms | Allocations: 87)
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/views/admins/products/index.html.haml:16
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/admins/products/index.html.haml:22
+  Rendered admins/products/index.html.haml within layouts/application (Duration: 7.5ms | Allocations: 1228)
+  Rendered layout layouts/application.html.erb (Duration: 12.2ms | Allocations: 2520)
+Completed 200 OK in 21ms (Views: 12.0ms | ActiveRecord: 2.1ms | Allocations: 4158)
+
+
+Started GET "/admins/dashboard" for ::1 at 2024-03-20 14:58:55 +0530
+Processing by Admins::DashboardController#index as HTML
+  [1m[36mAdmin Load (0.8ms)[0m  [1m[34mSELECT `admins`.* FROM `admins` WHERE `admins`.`id` = 1 ORDER BY `admins`.`id` ASC LIMIT 1[0m
+  [1m[36mCategory Count (4.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `categories`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:4:in `index'
+  [1m[36mProduct Count (4.8ms)[0m  [1m[34mSELECT COUNT(*) FROM `products`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:5:in `index'
+  [1m[36mOrder Load (0.6ms)[0m  [1m[34mSELECT `orders`.* FROM `orders`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:9:in `index'
+  [1m[36mProduct Load (0.8ms)[0m  [1m[34mSELECT `products`.* FROM `products` WHERE `products`.`id` = 1[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:9:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admins/dashboard/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.5ms | Allocations: 87)
+  [1m[36mOrder Count (1.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `orders`[0m
+  ↳ app/views/admins/dashboard/index.html.haml:16
+  Rendered admins/dashboard/index.html.haml within layouts/application (Duration: 4.7ms | Allocations: 572)
+  Rendered layout layouts/application.html.erb (Duration: 9.4ms | Allocations: 1864)
+Completed 200 OK in 39ms (Views: 9.0ms | ActiveRecord: 12.9ms | Allocations: 5531)
+
+
+Started GET "/admins/categories" for ::1 at 2024-03-20 14:58:56 +0530
+Processing by Admins::CategoriesController#index as HTML
+  [1m[36mAdmin Load (1.2ms)[0m  [1m[34mSELECT `admins`.* FROM `admins` WHERE `admins`.`id` = 1 ORDER BY `admins`.`id` ASC LIMIT 1[0m
+  Rendering layout layouts/application.html.erb
+  Rendering admins/categories/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.6ms | Allocations: 87)
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT `categories`.* FROM `categories`[0m
+  ↳ app/views/admins/categories/index.html.haml:14
+  Rendered admins/categories/index.html.haml within layouts/application (Duration: 4.9ms | Allocations: 691)
+  Rendered layout layouts/application.html.erb (Duration: 9.7ms | Allocations: 1983)
+Completed 200 OK in 19ms (Views: 10.2ms | ActiveRecord: 1.7ms | Allocations: 3624)
+
+
+Started GET "/admins/products" for ::1 at 2024-03-20 14:58:57 +0530
+Processing by Admins::ProductsController#index as HTML
+  [1m[36mAdmin Load (0.8ms)[0m  [1m[34mSELECT `admins`.* FROM `admins` WHERE `admins`.`id` = 1 ORDER BY `admins`.`id` ASC LIMIT 1[0m
+  Rendering layout layouts/application.html.erb
+  Rendering admins/products/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.5ms | Allocations: 87)
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/views/admins/products/index.html.haml:16
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/admins/products/index.html.haml:22
+  Rendered admins/products/index.html.haml within layouts/application (Duration: 7.1ms | Allocations: 1228)
+  Rendered layout layouts/application.html.erb (Duration: 10.3ms | Allocations: 2520)
+Completed 200 OK in 19ms (Views: 10.1ms | ActiveRecord: 2.0ms | Allocations: 4173)
+
+
+Started GET "/admins/orders" for ::1 at 2024-03-20 14:58:57 +0530
+Processing by Admins::OrdersController#index as HTML
+  [1m[36mAdmin Load (0.9ms)[0m  [1m[34mSELECT `admins`.* FROM `admins` WHERE `admins`.`id` = 1 ORDER BY `admins`.`id` ASC LIMIT 1[0m
+  Rendering layout layouts/application.html.erb
+  Rendering admins/orders/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.6ms | Allocations: 87)
+  [1m[36mOrder Load (1.3ms)[0m  [1m[34mSELECT `orders`.* FROM `orders`[0m
+  ↳ app/views/admins/orders/index.html.haml:16
+  [1m[36mCustomer Load (0.8ms)[0m  [1m[34mSELECT `customers`.* FROM `customers` WHERE `customers`.`id` = 1[0m
+  ↳ app/views/admins/orders/index.html.haml:16
+  [1m[36mProduct Load (0.9ms)[0m  [1m[34mSELECT `products`.* FROM `products` WHERE `products`.`id` = 1[0m
+  ↳ app/views/admins/orders/index.html.haml:16
+  Rendered admins/orders/index.html.haml within layouts/application (Duration: 13.5ms | Allocations: 2065)
+  Rendered layout layouts/application.html.erb (Duration: 18.6ms | Allocations: 3358)
+Completed 200 OK in 32ms (Views: 16.8ms | ActiveRecord: 3.7ms | Allocations: 4988)
+
+
+Started GET "/admins/dashboard" for ::1 at 2024-03-20 14:58:59 +0530
+Processing by Admins::DashboardController#index as HTML
+  [1m[36mAdmin Load (0.8ms)[0m  [1m[34mSELECT `admins`.* FROM `admins` WHERE `admins`.`id` = 1 ORDER BY `admins`.`id` ASC LIMIT 1[0m
+  [1m[36mCategory Count (1.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `categories`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:4:in `index'
+  [1m[36mProduct Count (1.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `products`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:5:in `index'
+  [1m[36mOrder Load (0.5ms)[0m  [1m[34mSELECT `orders`.* FROM `orders`[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:9:in `index'
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT `products`.* FROM `products` WHERE `products`.`id` = 1[0m
+  ↳ app/controllers/admins/dashboard_controller.rb:9:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admins/dashboard/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.4ms | Allocations: 87)
+  [1m[36mOrder Count (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `orders`[0m
+  ↳ app/views/admins/dashboard/index.html.haml:16
+  Rendered admins/dashboard/index.html.haml within layouts/application (Duration: 2.8ms | Allocations: 572)
+  Rendered layout layouts/application.html.erb (Duration: 5.1ms | Allocations: 1887)
+Completed 200 OK in 25ms (Views: 4.6ms | ActiveRecord: 5.8ms | Allocations: 5559)
+
+
+Started GET "/admins/orders" for ::1 at 2024-03-20 15:03:37 +0530
+Processing by Admins::OrdersController#index as HTML
+  [1m[36mAdmin Load (0.3ms)[0m  [1m[34mSELECT `admins`.* FROM `admins` WHERE `admins`.`id` = 1 ORDER BY `admins`.`id` ASC LIMIT 1[0m
+  Rendering layout layouts/application.html.erb
+  Rendering admins/orders/index.html.haml within layouts/application
+  Rendered admins/_header.html.haml (Duration: 0.2ms | Allocations: 87)
+  [1m[36mOrder Load (0.2ms)[0m  [1m[34mSELECT `orders`.* FROM `orders`[0m
+  ↳ app/views/admins/orders/index.html.haml:16
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT `customers`.* FROM `customers` WHERE `customers`.`id` = 1[0m
+  ↳ app/views/admins/orders/index.html.haml:16
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT `products`.* FROM `products` WHERE `products`.`id` = 1[0m
+  ↳ app/views/admins/orders/index.html.haml:16
+  Rendered admins/orders/index.html.haml within layouts/application (Duration: 3.3ms | Allocations: 2065)
+  Rendered layout layouts/application.html.erb (Duration: 4.9ms | Allocations: 3373)
+Completed 200 OK in 8ms (Views: 4.6ms | ActiveRecord: 0.9ms | Allocations: 5037)
+
+
